@@ -1,7 +1,7 @@
 {
   "domain": "dvs_filter",
   "name": "DVS Filter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "documentation": "https://github.com/karelvdvd/dvs_filter",
   "issue_tracker": "https://github.com/karelvdvd/dvs_filter/issues",
   "codeowners": ["@karelvdvd"],
