@@ -110,6 +110,13 @@ class DVSFilterSensor(SensorEntity):
         self._attr_unique_id = f"dvs_filter_{key}"
         self._attr_native_value = None
 
+        self._attr_device_info = {
+            "identifiers": {("dvs_filter", "dvs_filter_controller")},
+            "name": "DVS Filter",
+            "manufacturer": "DVS Filtertechniek",
+            "model": "CL65-L Controller",
+        }
+
         hub.register(self._update_callback)
 
     def _update_callback(self):
