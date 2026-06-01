@@ -1,0 +1,9 @@
+{
+  "domain": "dvs_filter",
+  "name": "DVS Filter",
+  "version": "1.0.0",
+  "documentation": "",
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "local_push"
+}
