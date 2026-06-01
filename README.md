@@ -25,13 +25,13 @@ A GL.iNet Opal (GL-SFT1200) travel router is used as a bridge between the DVS co
 
 ```text
 Home Network
-192.168.53.x
+192.168.x.x
         │
         │
         ▼
 GL.iNet Opal
-LAN: 192.168.53.10
-WAN: 192.168.1.2
+LAN: 192.168.x.10
+WAN: 192.168.1.x
         │
         ▼
 DVS Controller
@@ -45,13 +45,13 @@ The Opal connects to the DVS WiFi network and exposes the controller on the loca
 The controller becomes available through:
 
 ```text
-http://192.168.53.10:8080
+http://192.168.X.10:8080
 ```
 
 WebSocket traffic is proxied through:
 
 ```text
-ws://192.168.53.10:8080/ws
+ws://192.168.X.10:8080/ws
 ```
 
 ## Home Assistant Integration
