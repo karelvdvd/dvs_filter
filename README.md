@@ -1,3 +1,5 @@
+![DVS Filter](images/logo.png)
+
 # DVS Filter Home Assistant Integration
 
 Custom Home Assistant integration for DVS Filter controllers.
