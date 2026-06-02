@@ -23,7 +23,7 @@ SENSOR_KEYS = {
     "5": "Key 5",
     "60": "Key 60",
     "61": "Key 61",
-    "62": "Key 62",
+    "62": "Drum Rinse Count",
     "63": "Key 63",
     "64": "Key 64",
     "65": "Key 65",
