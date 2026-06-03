@@ -21,21 +21,27 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 SENSOR_KEYS = {
     "4": "Key 4",
     "5": "Key 5",
-    "60": "Key 60",
-    "61": "Key 61",
-    "62": "Drum Rinse Count",
-    "63": "Key 63",
-    "64": "Key 64",
-    "65": "Key 65",
-    "66": "Key 66",
-    "67": "Key 67",
-    "70": "Voltage",
-    "120": "Key 120",
-    "121": "Key 121",
-    "122": "MAC",
-    "123": "Status",
+
+    "60": "Dry Run Cycles",
+    "61": "Dry Run Cycles 24h",
+
+    "62": "Regular Clean Cycles",
+    "63": "Regular Clean Cycles 24h",
+
+    "64": "Forced Clean Cycles",
+    "65": "ECO Mode Cycles",
+    "66": "Waste Chute Cycles",
+    "67": "Refill Cycles",
+
+    "70": "Water Temperature",
+
+    "120": "Software Version",
+    "121": "Hardware Revision",
+    "122": "MAC Address",
+    "123": "Warnings",
+
     "142": "Key 142",
-    "143": "SMS status",
+    "143": "SMS Status",
     "144": "Key 144",
 }
 
