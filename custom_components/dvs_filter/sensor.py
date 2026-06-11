@@ -57,7 +57,10 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
     async_add_entities(entities)
 
+    # Start websocket in background.
+    # Do not await this, otherwise Home Assistant startup can be delayed.
     hass.async_create_task(hub.connect())
+
     return True
 
 
@@ -74,12 +77,19 @@ class DVSFilterHub:
     async def connect(self):
         session = async_get_clientsession(self.hass)
 
+        # Give Home Assistant some time to finish startup before opening the websocket.
+        await asyncio.sleep(5)
+
         while True:
             try:
-                _LOGGER.warning("Connecting to DVS filter websocket: %s", self.url)
+                _LOGGER.info("Connecting to DVS filter websocket: %s", self.url)
 
-                async with session.ws_connect(self.url, heartbeat=30) as ws:
-                    _LOGGER.warning("Connected to DVS filter websocket")
+                async with session.ws_connect(
+                    self.url,
+                    heartbeat=30,
+                    timeout=aiohttp.ClientTimeout(total=10),
+                ) as ws:
+                    _LOGGER.info("Connected to DVS filter websocket")
 
                     async for msg in ws:
                         if msg.type == aiohttp.WSMsgType.TEXT:
@@ -92,7 +102,7 @@ class DVSFilterHub:
                                     callback()
 
                             except Exception as err:
-                                _LOGGER.error("Error parsing DVS data: %s", err)
+                                _LOGGER.error("Error parsing DVS data: %r", err)
 
                         elif msg.type in (
                             aiohttp.WSMsgType.CLOSED,
@@ -101,11 +111,13 @@ class DVSFilterHub:
                             _LOGGER.warning("DVS websocket closed or error")
                             break
 
-            except Exception as err:
-                _LOGGER.warning("DVS websocket error: %r", err)
+            except asyncio.CancelledError:
+                raise
 
-            _LOGGER.warning("Reconnecting to DVS filter websocket in 10 seconds")
-            await asyncio.sleep(10)
+            except Exception as err:
+                _LOGGER.warning("DVS websocket unavailable, retrying: %r", err)
+
+            await asyncio.sleep(30)
 
 
 class DVSFilterSensor(SensorEntity):
