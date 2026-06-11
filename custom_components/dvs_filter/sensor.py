@@ -139,4 +139,4 @@ class DVSFilterSensor(SensorEntity):
 
     def _update_callback(self):
         self._attr_native_value = self.hub.data.get(self.key)
-        self.schedule_update_ha_state()
+        self.async_write_ha_state()
