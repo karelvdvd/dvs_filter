@@ -57,9 +57,8 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
     async_add_entities(entities)
 
-    # Start websocket in background.
-    # Do not await this, otherwise Home Assistant startup can be delayed.
-    hass.async_create_task(hub.connect())
+    # Start websocket in background without blocking Home Assistant startup.
+    hass.loop.create_task(hub.connect(), name="dvs_filter_websocket")
 
     return True
 
@@ -78,7 +77,7 @@ class DVSFilterHub:
         session = async_get_clientsession(self.hass)
 
         # Give Home Assistant some time to finish startup before opening the websocket.
-        await asyncio.sleep(5)
+        await asyncio.sleep(10)
 
         while True:
             try:
